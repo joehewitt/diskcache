@@ -1,0 +1,21 @@
+{
+  "name": "diskcache",
+  "description": "Caches data on disk and optionally in memory.",
+  "version": "0.0.1",
+  "url": "http://github.com/joehewitt/diskcache",
+  "repository": {
+      "type": "git",
+      "url" : "http://github.com/joehewitt/diskcache.git"
+  },
+  "keywords": ["cache"],
+  "author": "Joe Hewitt <joe@joehewitt.com>",
+  "contributors": [],
+  "dependencies": {      
+      "gzip": "",
+      "mkdir": "",
+      "underscore": ""
+  },
+  "engines": { "node": ">=0.4.0" },
+  "main": "./lib/diskcache",
+  "directories": {}
+}
