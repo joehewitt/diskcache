@@ -2,7 +2,7 @@
   "name": "diskcache",
   "description": "Caches data on disk and optionally in memory.",
   "version": "0.0.1",
-  "url": "http://github.com/joehewitt/diskcache",
+  "homepage": "http://github.com/joehewitt/diskcache",
   "repository": {
       "type": "git",
       "url" : "http://github.com/joehewitt/diskcache.git"
