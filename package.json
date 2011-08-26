@@ -11,6 +11,8 @@
   "author": "Joe Hewitt <joe@joehewitt.com>",
   "contributors": [],
   "dependencies": {      
+      "buffers" : "",
+      "dandy": "",
       "gzip": "",
       "mkdir": "",
       "underscore": ""
