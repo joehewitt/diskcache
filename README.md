@@ -1,7 +1,7 @@
 diskcache
 ========
 
-Node.js cache for storing files on disk or in memory.
+Connect middleware for caching HTTP requests on disk or in memory.
 
 Installation
 ------------
