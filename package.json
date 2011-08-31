@@ -15,6 +15,7 @@
       "dandy": "",
       "gzip": "",
       "mkdir": "",
+      "rimraf": "",
       "underscore": ""
   },
   "engines": { "node": ">=0.4.0" },
