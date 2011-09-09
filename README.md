@@ -6,7 +6,7 @@ Connect middleware for caching HTTP requests on disk or in memory.
 Installation
 ------------
 
-    $ npm install diskcache (someday! not in registry yet)
+    $ npm install diskcache
 
 License 
 -------
