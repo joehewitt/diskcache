@@ -257,7 +257,7 @@ subclass(Cache, events.EventEmitter, {
 				fs.watchFile(depPath, _.bind(function(curr, prev) {
 					if (curr.mtime.getTime() != prev.mtime.getTime()) {
 						D&&D("Modified", depPath, curr.mtime);
-						_.each(this.monitors[depPath], function(fn) { fn(); });
+						_.each(this.monitors[depPath].slice(), function(fn) { fn(); });
 					}
 				}, this));					
 			}
@@ -284,7 +284,7 @@ subclass(Cache, events.EventEmitter, {
 		var U = url.parse(URL);
 		var cachePath = path.join(this.cachePath, U.pathname);
 
-		if (this.useDisk) {
+		if (this.useDisk && this.cachePath) {
 			mkdirsSync(cachePath);
 		}
 
