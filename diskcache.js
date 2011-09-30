@@ -254,7 +254,7 @@ subclass(Cache, events.EventEmitter, {
 			} else {
 				this.monitors[depPath] = [mon];	
 
-				fs.watchFile(depPath, {interval: 100}, _.bind(function(curr, prev) {
+				fs.watchFile(depPath, {interval: 0}, _.bind(function(curr, prev) {
 					if (curr.mtime.getTime() != prev.mtime.getTime()) {
 						D&&D("Modified", depPath, curr.mtime);
 						_.each(this.monitors[depPath].slice(), function(fn) { fn(); });
