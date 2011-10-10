@@ -233,12 +233,14 @@ subclass(Cache, events.EventEmitter, {
 		var mon = _.bind(function() {
 			_.each(dependencies, _.bind(function(depPath) {
 				var monitors = this.monitors[depPath];
-				var index = monitors.indexOf(mon);
-				monitors.splice(index, 1);
-				if (!monitors.length) {
-					D&&D('Unwatch', depPath, URL);
-					fs.unwatchFile(depPath);
-					delete this.monitors[depPath];
+				if (monitors) {
+					var index = monitors.indexOf(mon);
+					monitors.splice(index, 1);
+					if (!monitors.length) {
+						D&&D('Unwatch', depPath, URL);
+						fs.unwatchFile(depPath);
+						delete this.monitors[depPath];
+					}
 				}
 			}, this));
 
