@@ -74,8 +74,8 @@ subclass(Cache, events.EventEmitter, {
 				D&&D('Try to load', keys.path, 'for', URL);
 
 				fs.readFile(keys.path+'.meta.json', _.bind(function(err, jsonData) {
-					if (err) return cb ? cb(err) : 0;
-				
+					if (err || !jsonData || !jsonData.length) return cb ? cb(err) : 0;
+					
 					var entry = JSON.parse(jsonData);
 
 					async.waterfall([
