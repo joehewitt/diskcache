@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/joehewitt/diskcache.png)](http://travis-ci.org/joehewitt/diskcache)
 diskcache
 ========
 
