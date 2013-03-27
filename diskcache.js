@@ -1,4 +1,5 @@
 
+// Disables logging
 var D;
 
 var crypto = require('crypto');
@@ -13,7 +14,7 @@ var dandy = require('dandy/errors');
 var abind = require('dandy/errors').abind;
 var mkdirsSync = require('mkdir').mkdirsSync;
 var rimraf = require('rimraf');
-var compress = require('compress');
+var zlib = require('zlib');
 
 // Kind of odd that this isn't defined, but ok...
 mime.define({
@@ -256,7 +257,7 @@ subclass(Cache, events.EventEmitter, {
 			} else {
 				this.monitors[depPath] = [mon];	
 
-				fs.watchFile(depPath, {interval: 0}, _.bind(function(curr, prev) {
+				fs.watchFile(depPath, {interval: 100}, _.bind(function(curr, prev) {
 					if (curr.mtime.getTime() != prev.mtime.getTime()) {
 						D&&D("Modified", depPath, curr.mtime);
 						_.each(this.monitors[depPath].slice(), function(fn) { fn(); });
@@ -338,22 +339,18 @@ subclass(Cache, events.EventEmitter, {
 	_storeAndZip: function(URL, keys, entry, cb) {
 		if (this.useMem) {
 			if (this.useGzip && entry.body) {
-				var gzip=new compress.Gzip;
-				gzip.init();
-				
-				var encoding = 'binary';
-				if (entry.charset && entry.charset.toLowerCase() == 'utf-8') {
-					encoding = 'utf8';
-				}
-
-				var buf1 = gzip.deflate(entry.body, encoding);
-		    	var buf2 = gzip.end();
-		    	entry.bodyZipped = new Buffer(buf1+buf2, 'binary');
-	    		
-	    		this._storeInMemCache(URL, keys, entry);
-	    		process.nextTick(function() {
-					cb(0, entry, true);	    			
-	    		})
+				// var encoding = 'binary';
+				// if (entry.charset && entry.charset.toLowerCase() == 'utf-8') {
+				// 	encoding = 'utf8';
+				// }
+				zlib.gzip(entry.body, _.bind(function(err, buf) {
+			    	entry.bodyZipped = buf;
+		    		
+		    		this._storeInMemCache(URL, keys, entry);
+		    		process.nextTick(function() {
+						cb(0, entry, true);	    			
+		    		});
+				}, this));
 		    } else {
 				this._storeInMemCache(URL, keys, entry);
 				cb(0, entry, true);
