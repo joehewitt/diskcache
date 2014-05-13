@@ -285,7 +285,7 @@ subclass(Cache, events.EventEmitter, {
 		var hash = this._hashForURL(URL);
 
 		var U = url.parse(URL);
-		var cachePath = path.join(this.cachePath, U.pathname);
+		var cachePath = path.join(this.cachePath||'', U.pathname);
 
 		if (this.useDisk && this.cachePath) {
 			mkdirsSync(cachePath);
